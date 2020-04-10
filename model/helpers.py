@@ -1,6 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
 import math
 
 _df = pd.read_csv('model/data.csv')
@@ -10,10 +8,23 @@ df = _df.drop(labels=['other', 'source'], axis=1)
 w_ = {'temp': 3, 'rainfall': 2, 'soil_types': 2, 'ph': 1, 'prev_crops': 3}
 
 
+def check_float(s):
+    try:
+        x = float(s)
+        if math.isnan(x):
+            return False
+        return True
+    except ValueError:
+        return False
+    return False
+
+
 def gbell(x, l, h):
-    a = h-l  # 2*(h-l)/3
+    if not check_float(x):
+        return 0
+    a = float(h)-float(l)  # 2*(h-l)/3
     b = 3  # (h+l)/(h-l)
-    c = (h+l)/2
+    c = (float(h)+float(l))/2
     # a = length of the curve
     # b = used to describe the slope of the curve
     # c = center of the curve on x-axis
@@ -21,7 +32,7 @@ def gbell(x, l, h):
     # output: [-1, 1]
     # ref: https://functionbay.com/documentation/onlinehelp/default.htm#!Documents/fuzzymembershipfunctions.htm
     # simulator: https://www.desmos.com/calculator/3iioyvma2l
-    return 1/(1+pow(abs((x-c)/a), 2*b))
+    return 1/(1+pow(abs((float(x)-c)/a), 2*b))
 
 
 def get_scores_dict(row, inp_):
@@ -48,18 +59,16 @@ def get_scores_dict(row, inp_):
     # for uniqueness of soil type. the limited the number of soil types, the more imporant the feature
     _soils_arr = row['soil_types'].split(",")
     if 'soil_types' in inp_:
-        for x in inp_['soil_types']:
-            if x in _soils_arr:
-                res['soil'] = res['soil'] + (1/len(_soils_arr))*w_['soil_types']
+        if inp_['soil_types'] in _soils_arr:
+            res['soil'] = res['soil'] + (1/len(_soils_arr))*w_['soil_types']
     score = score + res['soil']
     max_score = max_score + 1/len(_soils_arr)
 
     # for uniqueness of previous crops. the limited the number of previous crops, the more imporant the feature
     _prev_crops = str(row['prev_crops']).split(",")
     if 'prev_crops' in inp_:
-        for x in inp_['prev_crops']:
-            if x in _prev_crops:
-                res['prev_crops'] = res['prev_crops'] + (1/len(_prev_crops))*w_['prev_crops']
+        if inp_['prev_crops'] in _prev_crops:
+            res['prev_crops'] = res['prev_crops'] + (1/len(_prev_crops))*w_['prev_crops']
     score = score + res['prev_crops']
     max_score = max_score + 1/len(_prev_crops)
 
