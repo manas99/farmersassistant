@@ -1,43 +1,114 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Farmer's Assistant</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="">
-        <meta name="theme-color" content="#282e47">
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <link rel="stylesheet" href="{% static 'plugins/bootstrap-4.4.1-dist/css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'plugins/alertifyjs/css/alertify.min.css' %}">
-        <link rel="stylesheet" href="{% static 'plugins/alertifyjs/css/themes/default.min.css' %}">
-        <link rel="stylesheet" href="{% static 'plugins/loaders/loaders.css' %}">
-        <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    </head>
-    <body>
-        <div class="container mt-3 text-center">
-            <h2 class="">Farmer's Assistant</h2>
-            <div class="mx-auto" style="height:300px;width:300px;background-image:url('{% static 'images/background.svg' %}');background-size:contain;background-repeat: no-repeat;background-position: center;">
+<head>
+    <meta charset="utf-8">
+    <title>Farmer's Assistant</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="theme-color" content="#282e47">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-4.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/alertifyjs/css/alertify.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/alertifyjs/css/themes/default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/loaders/loaders.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
 
-            </div>
-            <div class="m-3">
-                <button id="pred-button" type="button" class="btn btn-success btn-lg">Get Prediction</button>
-            </div>
-            <div class="m-3 mx-auto" id="result">
+<div class="container mt-3 text-center">
+    <h2 class="">Farmer's Assistant</h2>
+    <div class="mx-auto"
+         style="height:300px;width:300px;background-image:url('{% static 'images/background.svg' %}');background-size:contain;background-repeat: no-repeat;background-position: center;">
 
-            </div>
+    </div>
+    <div class="m-3">
+        <button id="pred-button" type="button" class="btn btn-success btn-lg">Get Prediction</button>
+    </div>
+    <div class="m-3 mx-auto" id="result">
+
+    </div>
+</div>
+
+
+<!--<img src="https://media.giphy.com/media/3og0ILgFOEXIL8Bsn6/giphy.gif" alt="">-->
+
+<div class="container my-3">
+    <h3>Enter Information</h3>
+
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="name">Temperature</label>
+            <input type="text" class="form-control" id="temp" name='temperature' placeholder="Enter Temperature">
         </div>
-        <div id="custom-loader" class="justify-content-center align-items-center">
-            <div class='ball-scale-multiple'>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+
+        <div class="form-group">
+            <label for="name">Rainfall</label>
+            <input type="text" class="form-control" id="rain" name='rainfall' placeholder="Enter Rainfall">
         </div>
-        <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/bootstrap-4.4.1-dist/js/bootstrap.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'plugins/alertifyjs/alertify.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/main.js'%}"></script>
-    </body>
+
+        <div class="form-group">
+            <label for="name">Ph Level</label>
+            <input type="number" class="form-control" id="ph" name='ph' placeholder="Enter Ph level">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select Soil type</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option value="red">Red</option>
+                <option value="black_cotton">Black Cotton</option>
+                <option value="sandy">Sandy</option>
+                <option value="loam">Loam</option>
+                <option value="clay">Clay</option>
+                <option value="alluvial">Alluvial</option>
+                <option value="sandy_loam">Sandy Loam</option>
+                <option value="clay_loam">Clay Loam</option>
+                <option value="deep_loam">Deep Loam</option>
+                <option value="heavy_loam">Heavy Loam</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select Previous crop</label>
+            <select class="form-control" id="exampleFormControlSelect1 ">
+                <option>Old Crop</option>
+                <option>Old Crop</option>
+                <option>Old Crop</option>
+                <option>Old Crop</option>
+                <option>Old Crop</option>
+            </select>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-success" id="submit_data">Submit</button>
+
+
+
+    </form>
+
+
+
+
+
+</div>
+
+
+<div id="custom-loader" class="justify-content-center align-items-center">
+    <div class='ball-scale-multiple'>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/bootstrap-4.4.1-dist/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/alertifyjs/alertify.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js'%}"></script>
+</body>
 </html>
