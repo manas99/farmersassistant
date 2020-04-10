@@ -5,10 +5,3 @@ from rest_framework.decorators import api_view
 
 def index(request):
     return render(request, 'index.html')
-
-
-@api_view(["POST"])
-def get_pred(request):
-    return Response({
-        'success': True
-    })
