@@ -4,6 +4,20 @@ $(document).ready(function(){
     $('#pred-button').click(()=>{
         getLocation();
     })
+
+    $( "#submit_data" ).click(function() {
+        var temp = $("#temp").val();
+        var rain = $("#rain").val();
+        var ph =   $("#ph").val();
+        var soil = $("#soil").val();
+        var previous_crop = $("#crop").val();
+
+        $.post( "/api/get_predictions", { temp: temp, rainfall:rain, ph:ph, soil_type:soil, prev_crop:previous_crop} , function(data){
+        console.log(data);
+
+        } );
+});
+
 })
 
 function getLocation() {
@@ -30,3 +44,5 @@ function startLoader(){
 function stopLoader(){
     $("#custom-loader").css('display', 'none');
 }
+
+
