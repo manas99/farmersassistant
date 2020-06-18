@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+<<<<<<< Updated upstream
     <head>
         <meta charset="utf-8">
         <title>Farmer's Assistant</title>
@@ -40,4 +41,188 @@
         <script type="text/javascript" src="{% static 'plugins/alertifyjs/alertify.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/main.js'%}"></script>
     </body>
+=======
+<head>
+    <meta charset="utf-8">
+    <title>Farmer's Assistant</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="theme-color" content="#282e47">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-4.4.1-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/alertifyjs/css/alertify.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/alertifyjs/css/themes/default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/loaders/loaders.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/Chart.js/Chart.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body style="width:100% height:100%;">
+
+    <!--<div class="container mt-3 text-center">
+        <div class="m-3">
+            <button id="pred-button" type="button" class="btn btn-success btn-lg">Get Prediction</button>
+        </div>
+    </div>-->
+
+    <!--<div class="mx-auto" style="height:100vh;width:100vh;background-image:url('{% static 'images/background.svg' %}');background-size:contain;background-repeat: no-repeat;background-position: center;">
+        <img src="https://media.giphy.com/media/3og0ILgFOEXIL8Bsn6/giphy.gif" alt="">
+    </div>-->
+
+    <div class="p-4" style="height:100vh;width:100%;" class="d-flex align-items-center justify-content-center m-0">
+        <div class="col-md-6 mx-auto text-center p-4">
+            <h2 class="my-4 ral-bold">Farmer's Assistant</h2>
+            <blockquote class="blockquote">
+                A system to suggest the optimal crop according to your specific condition.
+            </blockquote>
+            <div class="mx-auto" style="width:100%;height:200px;background-image:url('{% static 'images/back.png' %}');background-size:contain;background-repeat: no-repeat;background-position: center;"></div>
+            <div class="m-4">
+                <a href="#take–input" class="btn btn-lg btn-link">Get Prediction</a>
+            </div>
+            <div class="my-4">
+                A project by
+                <br />Manas Oswal, Karan Mahajan, Shubham Pagare, Vishal Kasa.
+            </div>
+        </div>
+    </div>
+
+    <div style="height:100vh;width:100%;" class="d-flex align-items-center justify-content-center m-0" id="take–input">
+        <div class="card col-md-4 p-4">
+            <h3>Enter  Information</h3>
+            <!--<button type="button" class="btn btn-link w-100" id="fetch-data">Fetch Information</button>
+            <div id="location" class="my-1 text-center d-block">
+
+            </div>-->
+            <div class="form-group">
+                <label for="temp">Temperature</label>
+                <input type="text" class="form-control" id="temp" placeholder="Enter Temperature">
+            </div>
+
+            <div class="form-group">
+                <label for="rain">Rainfall</label>
+                <input type="text" class="form-control" id="rain" placeholder="Enter Rainfall">
+            </div>
+
+            <div class="form-group">
+                <label for="ph">Ph Level</label>
+                <input type="number" class="form-control" id="ph" placeholder="Enter Ph level">
+            </div>
+
+            <div class="form-group">
+                <label for="soil-type-select">Select Soil type</label>
+                <select class="form-control" id="soil-type-select">
+                    <option value="red">Red</option>
+                    <option value="black_cotton">Black Cotton</option>
+                    <option value="sandy">Sandy</option>
+                    <option value="loam">Loam</option>
+                    <option value="clay">Clay</option>
+                    <option value="alluvial">Alluvial</option>
+                    <option value="sandy_loam">Sandy Loam</option>
+                    <option value="clay_loam">Clay Loam</option>
+                    <option value="deep_loam">Deep Loam</option>
+                    <option value="heavy_loam">Heavy Loam</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="prev-crop-select">Select Previous crop</label>
+                <select class="form-control" id="prev-crop-select">
+                    <option value="wheat">Wheat</option>
+                    <option value="maize">Maize</option>
+                    <option value="rice">Rice</option>
+                    <option value="jowar">Jowar</option>
+                    <option value="cotton">Cotton</option>
+                    <option value="soyabean">Soyabean</option>
+                    <option value="barley">Barley</option>
+                    <option value="bajra">Bajra</option>
+                    <option value="groundnut">Groundnut</option>
+                    <option value="legumes">Legumes</option>
+                    <option value="sugarcane">Sugarcane</option>
+                    <option value="banana">Banana</option>
+                    <option value="potato">Potato</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="submit_data">Submit</button>
+
+        </div>
+    </div>
+
+    <div class="my-3">
+
+        <div class="my-4 mx-auto" style="display:none;" id="result">
+            <div class="col-md-6 mx-auto">
+                <h3>Results</h3>
+                <div class="chart-container mx-auto">
+                    <div class="row my-2">
+                        <div class="col-md">
+                            <canvas id="total-score" width="400" height="400"></canvas>
+                        </div>
+                        <div class="col-md">
+                            <div class="row my-2">
+                                <div class="col-md" style="width:300px;height:300px;">
+                                    Weight: 3
+                                    <canvas id="temp-score" width="400" height="400"></canvas>
+                                </div>
+                                <div class="col-md" style="width:300px;height:300px;">
+                                    Weight: 2
+                                    <canvas id="rainfall-score" width="400" height="400"></canvas>
+                                </div>
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-md" style="width:300px;height:300px;">
+                                    Weight: 1
+                                    <canvas id="ph-score" width="400" height="400"></canvas>
+                                </div>
+                                <div class="col-md" style="width:300px;height:300px;">
+                                    Weight: 2
+                                    <canvas id="soil-score" width="400" height="400"></canvas>
+                                </div>
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-md" style="width:300px;height:300px;">
+                                    Weight: 3
+                                    <canvas id="prev-crop-score" width="400" height="400"></canvas>
+                                </div>
+                                <div class="col-md" style="width:300px;height:300px;">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4" style="height:100vh;width:100%;" class="d-flex align-items-center justify-content-center m-0">
+        <div class="col-md-6 mx-auto text-center p-4">
+            <div class="my-4">
+                Data Sources: <br />
+                <a href="farmer.gov.in">farmer.gov.in</a>,
+                <a href="farmingindia.in">farmingindia.in</a>,
+                <a href="agrifarming.in">agrifarming.in</a>,
+                <a href="vikaspedia.in">vikaspedia.in</a>,
+                <a href="agropedia.iitk.ac.in">agropedia.iitk.ac.in</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="custom-loader" class="justify-content-center align-items-center">
+        <div class='ball-scale-multiple'>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/bootstrap-4.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/alertifyjs/alertify.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/Chart.js/Chart.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js'%}"></script>
+</body>
+>>>>>>> Stashed changes
 </html>

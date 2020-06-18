@@ -23,7 +23,7 @@ def gbell(x, l, h):
     if not check_float(x):
         return 0
     a = float(h)-float(l)  # 2*(h-l)/3
-    b = 3  # (h+l)/(h-l)
+    b = 2  # (h+l)/(h-l)
     c = (float(h)+float(l))/2
     # a = length of the curve
     # b = used to describe the slope of the curve
@@ -36,7 +36,7 @@ def gbell(x, l, h):
 
 
 def get_scores_dict(row, inp_):
-    res = {'temp': 0, 'rainfall': 0, 'ph': 0, 'soil': 0, 'prev_crops': 0}
+    res = {'temp': 0, 'rainfall': 0, 'ph': 0, 'soil': 0, 'prev': 0}
     score = 0
     max_score = 0
 
@@ -58,18 +58,18 @@ def get_scores_dict(row, inp_):
 
     # for uniqueness of soil type. the limited the number of soil types, the more imporant the feature
     _soils_arr = row['soil_types'].split(",")
-    if 'soil_types' in inp_:
-        if inp_['soil_types'] in _soils_arr:
+    if 'soil_type' in inp_:
+        if inp_['soil_type'] in _soils_arr:
             res['soil'] = res['soil'] + (1/len(_soils_arr))*w_['soil_types']
     score = score + res['soil']
     max_score = max_score + 1/len(_soils_arr)
 
     # for uniqueness of previous crops. the limited the number of previous crops, the more imporant the feature
     _prev_crops = str(row['prev_crops']).split(",")
-    if 'prev_crops' in inp_:
-        if inp_['prev_crops'] in _prev_crops:
-            res['prev_crops'] = res['prev_crops'] + (1/len(_prev_crops))*w_['prev_crops']
-    score = score + res['prev_crops']
+    if 'prev_crop' in inp_:
+        if inp_['prev_crop'] in _prev_crops:
+            res['prev'] = res['prev'] + (1/len(_prev_crops))*w_['prev_crops']
+    score = score + res['prev']
     max_score = max_score + 1/len(_prev_crops)
 
     res['total'] = score

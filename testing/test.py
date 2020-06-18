@@ -48,7 +48,7 @@ def get_scores_dict(row, inp_):
     # for uniqueness of soil type. the limited the number of soil types, the more imporant the feature
     _soils_arr = row['soil_types'].split(",")
     res['soil'] = 0
-    for x in inp_['soil_types']:
+    for x in inp_['soil_type']:
         if x in _soils_arr:
             res['soil'] = res['soil'] + (1/len(_soils_arr))*w_['soil_types']
     score = score + res['soil']
@@ -56,10 +56,10 @@ def get_scores_dict(row, inp_):
 
     # for uniqueness of previous crops. the limited the number of previous crops, the more imporant the feature
     _prev_crops = str(row['prev_crops']).split(",")
-    res['prev_crops'] = 0
-    for x in inp_['prev_crops']:
+    res['prev_crop'] = 0
+    for x in inp_['prev_crop']:
         if x in _prev_crops:
-            res['prev_crops'] = res['prev_crops'] + (1/len(_prev_crops))*w_['prev_crops']
+            res['prev_crop'] = res['prev_crop'] + (1/len(_prev_crops))*w_['prev_crops']
     score = score + res['prev_crops']
     max_score = max_score + 1/len(_prev_crops)
 
@@ -68,7 +68,7 @@ def get_scores_dict(row, inp_):
 
 
 if __name__ == '__main__':
-    inp_ = {'temp': 20, 'rainfall': 700, 'ph': 6, 'soil_types': ['loam'], 'prev_crops': []}
+    inp_ = {'temp': 20, 'rainfall': 700, 'ph': 6, 'soil_type': ['loam'], 'prev_crop': []}
 
     out_ = {}
     for i, row in df.iterrows():
