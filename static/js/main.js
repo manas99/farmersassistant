@@ -6,11 +6,6 @@ $(document).ready(function(){
     $('#fetch-data').click(()=>{
         fetchData();
     })
-<<<<<<< Updated upstream
-})
-
-function getLocation() {
-=======
 
     $("#submit_data").click(function() {
         startLoader();
@@ -36,7 +31,6 @@ function getLocation() {
 });
 
 function fetchData(){
->>>>>>> Stashed changes
     if (navigator.geolocation) {
         startLoader();
         navigator.geolocation.getCurrentPosition((position)=>{
